@@ -8,22 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
-    let emojis: Array<String> = ["👻", "🙈", "💀", "😈", "🧛‍♀️", "🙀", "🐺", "🧟‍♀️", "🦸🏻‍♂️", "🕸️", "🕷️", "🍬"]
+    @State var emojis: Array<String> = []
     @State var cardCount: Int = 4
     var body: some View {
         VStack{
-            ScrollView{
+            Text("Memorize!").font(.largeTitle).fontWeight(.heavy).shadow(radius: 10, x: 10, y: 10)
+            HStack{
                 cards
             }
             Spacer()
-            cardCountAdjusters
+            themeChangers
         }
         .padding()
     }
     
     var cards: some View{
-        LazyVGrid(columns: [GridItem(.adaptive(minimum:120))]){
-            ForEach(0..<cardCount, id: \.self){ index in
+        LazyVGrid(columns: [GridItem(.adaptive(minimum:80))]){
+            ForEach(0..<emojis.count, id: \.self){ index in
                 CardView(content: emojis[index])
                     .aspectRatio(2/3, contentMode: .fit)
             }
@@ -31,39 +32,46 @@ struct ContentView: View {
         .foregroundColor(.orange)
     }
     
-    var cardCountAdjusters: some View{
+    var themeChangers: some View{
         HStack{
-            cardRemover
+            halloweenTheme
             Spacer()
-            cardAdder
+            vehicleTheme
+            Spacer()
+            foodTheme
         }
         .imageScale(.large)
         .font(.largeTitle)
     }
     
-    func cardCountAdjuster(by offset: Int, symbol: String) -> some View {
+    func themeChanger(theme: [String], themeButton: String) -> some View{
         Button(action: {
-            cardCount += offset
-        }, label: {
-            Image(systemName: symbol)
+            emojis = theme.shuffled()
+        }, label:{
+            Text(themeButton)
         })
-        .disabled(cardCount + offset < 1 || cardCount + offset > emojis.count)
     }
     
-    var cardRemover: some View{
-        return cardCountAdjuster(by: -1, symbol: "rectangle.stack.fill.badge.minus")
+    var halloweenTheme: some View{
+        themeChanger(theme: ["👻","👻","💀","💀","🕸️","🕸️","🕷️","🕷️","🧙🏻‍♀️","🧙🏻‍♀️","🐺","🐺", "🙀" ,"🙀" ,"🍭", "🍭"], themeButton: "👻")
+    }
+    var vehicleTheme: some View{
+        themeChanger(theme: ["🚘","🚘","🚔","🚔","🚚","🚚","🏎️","🏎️","🚑","🚑","🚜","🚜", "🚎" ,"🚎" ,"🛵", "🛵"], themeButton: "🚘")
     }
     
-    var cardAdder: some View{
-        return cardCountAdjuster(by: 1, symbol: "rectangle.stack.fill.badge.plus")
+    var foodTheme: some View{
+        themeChanger(theme: ["🍔","🍔","🌮","🌮","🌭","🌭","🍟","🍟","🍙","🍙","🍜","🍜", "🍕" ,"🍕" ,"🍗", "🍗"], themeButton: "🍔")
     }
+    
+    
+    
         
 }
 
 struct CardView: View{
     let content: String
     
-    @State var isFaceUp = true
+    @State var isFaceUp = false
     
     var body: some View{
         ZStack {
