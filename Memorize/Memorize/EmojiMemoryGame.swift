@@ -12,7 +12,7 @@ class EmojiMemoryGame: ObservableObject {
     private static var theme = getTheme()
     
     private static func getTheme() -> Themes {
-        return Themes(index: Int.random(in: 0...2))
+        return Themes(index: Int.random(in: 0...5))
     }
     
     private static func createMemoryGame(_ cardTheme: Themes) -> MemoryGame<String> {
@@ -33,6 +33,34 @@ class EmojiMemoryGame: ObservableObject {
         return model.cards
     }
     
+    func getColor() -> Color{
+        let color = EmojiMemoryGame.theme.getColor()
+        switch color {
+        case "orange":
+            return .orange
+        case "blue":
+            return .blue
+        case "red":
+            return .red
+        case "green":
+            return .green
+        case "yellow":
+            return .yellow
+        case "purple":
+            return .purple
+        default:
+            return.gray
+        }
+    }
+    
+    func getScore() -> Int{
+        return model.getScore()
+    }
+    
+    func getTheme() -> String{
+        return EmojiMemoryGame.theme.getTheme()
+    }
+    
     // MARK: - Intents
     
     func shuffle(){
@@ -48,19 +76,7 @@ class EmojiMemoryGame: ObservableObject {
         model = EmojiMemoryGame.createMemoryGame(EmojiMemoryGame.theme)
     }
     
-    func getColor() -> Color{
-        let color = EmojiMemoryGame.theme.getColor()
-        switch color {
-        case "orange":
-            return .orange
-        case "blue":
-            return .blue
-        case "red":
-            return .red
-        default:
-            return.gray
-        }
-    }
+
     
     
 }

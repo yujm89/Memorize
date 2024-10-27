@@ -9,7 +9,11 @@ import Foundation
 
 struct Themes {
     private let cardThemes: [[String]] = [["👻","💀","🕸️","🕷️","🧙🏻‍♀️","🐺","🙀","🧟"], ["🚕","🚎","🏎️","🚓","🚚","🚙","🛺", "🚑"],
-        ["🍔","🍕","🍟","🌭","🌮","🌯","🍩", "🥓"]]
+        ["🍔","🍕","🍟","🌭","🌮","🌯","🍩", "🥓"],
+        ["🧥","🥼","👖","👘","🩳","👕","👗", "👚"],
+        ["🐆","🦍","🦓","🦣","🦘","🦧","🐖", "🦑"],
+        ["⚽️","🏀","🏈","🎾","⚾️","🏐","🏒", "🏸"]]
+    
     let ThemeName: String
     let numberOfCards = 8
     let theme: [String]
@@ -28,6 +32,15 @@ struct Themes {
         case 2:
             ThemeName = "Food"
             cardColor = "red"
+        case 3:
+            ThemeName = "Clothing"
+            cardColor = "green"
+        case 4:
+            ThemeName = "Animals"
+            cardColor = "yellow"
+        case 5:
+            ThemeName = "Sports"
+            cardColor = "purple"
         default:
             ThemeName = "Unknown"
             cardColor = "gray"
@@ -36,6 +49,10 @@ struct Themes {
     
     func getColor() -> String {
         return cardColor
+    }
+    
+    func getTheme() -> String {
+        return ThemeName
     }
     
 }
