@@ -12,7 +12,7 @@ class EmojiMemoryGame: ObservableObject {
     private static var theme = getTheme()
     
     private static func getTheme() -> Themes {
-        return Themes(index: Int.random(in: 0...1))
+        return Themes(index: Int.random(in: 0...2))
     }
     
     private static func createMemoryGame(_ cardTheme: Themes) -> MemoryGame<String> {
@@ -25,7 +25,7 @@ class EmojiMemoryGame: ObservableObject {
         }
     }
     
-    @Published private var model = createMemoryGame(getTheme())
+    @Published private var model = createMemoryGame(theme)
 
     
         
@@ -44,7 +44,22 @@ class EmojiMemoryGame: ObservableObject {
     }
     
     func newGame(){
-        model = EmojiMemoryGame.createMemoryGame(EmojiMemoryGame.getTheme())
+        EmojiMemoryGame.theme = EmojiMemoryGame.getTheme()
+        model = EmojiMemoryGame.createMemoryGame(EmojiMemoryGame.theme)
+    }
+    
+    func getColor() -> Color{
+        let color = EmojiMemoryGame.theme.getColor()
+        switch color {
+        case "orange":
+            return .orange
+        case "blue":
+            return .blue
+        case "red":
+            return .red
+        default:
+            return.gray
+        }
     }
     
     
