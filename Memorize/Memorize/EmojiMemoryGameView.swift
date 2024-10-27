@@ -20,7 +20,8 @@ struct EmojiMemoryGameView: View {
             Button("New Game"){
                 viewModel.newGame()
             }
-            //themeChangers
+            .padding()
+            .font(.title)
             
         }
         .padding()
@@ -39,44 +40,6 @@ struct EmojiMemoryGameView: View {
         }
         .foregroundColor(.gray)
     }
-    
-//    var themeChangers: some View{
-//        HStack(spacing: 20){
-//            Spacer()
-//            halloweenTheme
-//            vehicleTheme
-//            foodTheme
-//            Spacer()
-//        }
-//        .padding()
-//    }
-//    
-//    func themeChanger(theme: [String], themeButton: String, themeName: String) -> some View{
-//        Button(action: {
-//            emojis = theme.shuffled()
-//        }, label:{
-//            VStack{
-//                Image(systemName: themeButton).font(.largeTitle)
-//                Text(themeName).font(.title3)
-//            }
-//            .foregroundStyle(.gray)
-//        })
-//    }
-//    
-//    var halloweenTheme: some View{
-//        themeChanger(theme: ["👻","👻","💀","💀","🕸️","🕸️","🕷️","🕷️","🧙🏻‍♀️","🧙🏻‍♀️","🐺","🐺", "🙀" ,"🙀" ,"🧟", "🧟"], themeButton: "figure.walk.circle", themeName: "Spooky")
-//    }
-//    var vehicleTheme: some View{
-//        themeChanger(theme: ["🚘","🚘","🚔","🚔","🚚","🚚","🏎️","🏎️","🚑","🚑","🚜","🚜", "🚎" ,"🚎" ,"🛵", "🛵"], themeButton: "car", themeName: "Vehicles")
-//    }
-//    
-//    var foodTheme: some View{
-//        themeChanger(theme: ["🍔","🍔","🌮","🌮","🌭","🌭","🍟","🍟","🍙","🍙","🍜","🍜", "🍕" ,"🍕" ,"🍗", "🍗"], themeButton: "fork.knife", themeName: "Food")
-//    }
-    
-    
-    
-        
 }
 
 struct CardView: View{
