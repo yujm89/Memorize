@@ -11,13 +11,17 @@ struct EmojiMemoryGameView: View {
     @ObservedObject var viewModel: EmojiMemoryGame
     var body: some View {
         VStack{
-            Text("Memorize!").font(.largeTitle).fontWeight(.heavy).shadow(radius: 10, x: 10, y: 10).padding()
-            Text("Current Theme: \(viewModel.getTheme())")
+            Text("Memorize!").font(.largeTitle).fontWeight(.heavy).shadow(radius: 10, x: 10, y: 10).padding().foregroundStyle(viewModel.getColor())
+            HStack{
+                Text("Currently: \(viewModel.getTheme())")
+                Spacer()
+                Text("Score: \(viewModel.getScore()) ").font(.title3)
+            }
+            
             HStack{
                 cards
                     .animation(.default, value: viewModel.cards)
             }
-            Text("Score: \(viewModel.getScore()) ").font(.title3).padding()
             Spacer()
             Button("New Game"){
                 viewModel.newGame()
